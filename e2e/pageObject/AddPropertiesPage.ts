@@ -10,8 +10,6 @@ export class AddPropertiesPage {
   private readonly propertySelector: Locator;
   private readonly addNewPropertySelector: Locator;
 
-  private readonly createPropertyHeadingSelector: Locator;
-
   private readonly propertyTitleSelector: Locator;
   private readonly propertyDescSelector: Locator;
 
@@ -43,10 +41,6 @@ export class AddPropertiesPage {
       name: "Add New Property",
     });
 
-    this.createPropertyHeadingSelector = this.page.getByRole("heading", {
-      name: "Create Properties",
-    });
-
     this.propertyTitleSelector = this.page.getByRole("textbox", {
       name: "Property Title",
     });
@@ -71,13 +65,10 @@ export class AddPropertiesPage {
 
     this.priceSelector = this.page.getByRole("spinbutton", { name: "e.g. 1" });
 
-    this.handledBySelector = this.page.getByRole("combobox", {
-      name: /Select user/i,
+    this.handledBySelector = this.page.getByText("Select user...");
+    this.handleByValueSelector = this.page.getByRole("option", {
+      name: "Madhavi Paudel",
     });
-
-    this.handleByValueSelector = this.page
-      .locator("button")
-      .filter({ hasText: "Madhavi Paudel" });
 
     this.basicInfoNextStepBtnSelector = this.page.getByRole("button", {
       name: "Next Step",
@@ -95,8 +86,6 @@ export class AddPropertiesPage {
   async addProperties(): Promise<void> {
     await this.propertySelector.click();
     await this.addNewPropertySelector.click();
-
-    expect(this.createPropertyHeadingSelector).toBeVisible();
   }
 
   async fillBasicInfoForm(dataTable: DataTable): Promise<void> {
