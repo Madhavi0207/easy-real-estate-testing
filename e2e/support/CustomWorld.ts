@@ -2,6 +2,7 @@ import { IWorldOptions, setWorldConstructor, World } from "@cucumber/cucumber";
 
 import { Browser, BrowserContext, Page } from "@playwright/test";
 import { LoginPage } from "../pageObject/LoginPage";
+import { AddPropertiesPage } from "../pageObject/AddPropertiesPage";
 
 export class CustomWorld extends World {
   browser!: Browser;
@@ -9,6 +10,7 @@ export class CustomWorld extends World {
   page!: Page;
 
   loginPage!: LoginPage;
+  addPropertiesPage!: AddPropertiesPage;
   generateEmail!: String;
 
   users: Record<string, unknown> = {};
@@ -20,7 +22,7 @@ export class CustomWorld extends World {
   }
 
   initPages(): void {
-    // this.signUpPage = new SignUpPage(this.page);
+    this.loginPage = new LoginPage(this.page);
   }
 
   setData(key: string, value: unknown): void {
