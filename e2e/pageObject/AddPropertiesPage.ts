@@ -67,8 +67,10 @@ export class AddPropertiesPage {
     this.gotoAppSelector = this.page
       .getByRole("link", { name: "Go to app" })
       .nth(0);
-    this.dashboardAssertion = this.page.getByRole("link", { name: "Overview" });
 
+    this.dashboardAssertion = this.page.getByRole("button", {
+      name: /Kaski admin/,
+    });
     this.propertySelector = this.page.getByRole("button", {
       name: "Properties",
     });
