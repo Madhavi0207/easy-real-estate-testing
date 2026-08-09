@@ -17,8 +17,8 @@ When the admin user fills basic info:
  | pokhara  | 27     | 10            |
 
  And the user enters the property details: 
- |propertyfacing | roadtype  | yearbuilt  | bedrooms | bathrooms | 
- |west           | paved     | 1990       | 4        | 3         |
+ | yearbuilt  | bedrooms | kitchen | floorDimension |
+ | 1990       | 4        | 2       | 200x200        |
 
  And the user uploads the photos of the house
 

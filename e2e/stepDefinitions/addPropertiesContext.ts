@@ -48,7 +48,11 @@ When(
 When(
   "the user enters the property details:",
   async function (this: CustomWorld, dataTable: DataTable) {
-    console.log("Okay");
+    if (!this.addPropertiesPage) {
+      this.addPropertiesPage = new AddPropertiesPage(this.page);
+    }
+
+    await this.addPropertiesPage.fillPropertyDetailsForm(dataTable);
   },
 );
 

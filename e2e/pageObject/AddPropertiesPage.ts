@@ -39,6 +39,23 @@ export class AddPropertiesPage {
 
   private readonly locationNextStepBtnSelector: Locator;
 
+  private readonly propertyFacingSelector: Locator;
+  private readonly propertyFacingValueSelector: Locator;
+
+  private readonly roadTypeSelector: Locator;
+  private readonly roadTypeValueSelector: Locator;
+
+  private readonly yearBuiltSelector: Locator;
+
+  private readonly bedRoomSelector: Locator;
+  private readonly kitchenSelector: Locator;
+  private readonly floorDimensionsSelector: Locator;
+
+  private readonly carAmenitySelector: Locator;
+  private readonly roomFacilitySelector: Locator;
+
+  private readonly propertyDetailsNextStepBtnSelector: Locator;
+
   constructor(page: Page) {
     this.page = page;
 
@@ -111,6 +128,45 @@ export class AddPropertiesPage {
     this.locationNextStepBtnSelector = this.page.getByRole("button", {
       name: "Next Step",
     });
+
+    this.propertyFacingSelector = this.page.getByRole("combobox", {
+      name: "Property Facing",
+    });
+    this.propertyFacingValueSelector = this.page
+      .locator("span")
+      .filter({ hasText: "South West (SW)" });
+
+    this.roadTypeSelector = this.page.getByRole("combobox", {
+      name: "Road Type",
+    });
+    this.roadTypeValueSelector = this.page.getByRole("option", {
+      name: "Paved",
+      exact: true,
+    });
+
+    this.yearBuiltSelector = this.page.getByRole("textbox", {
+      name: "e.g. 1990",
+    });
+
+    this.bedRoomSelector = this.page.getByRole("textbox", { name: "Bedrooms" });
+
+    this.kitchenSelector = this.page.getByRole("textbox", { name: "Kitchen" });
+
+    this.floorDimensionsSelector = this.page.getByRole("textbox", {
+      name: "Floor Dimensions",
+    });
+
+    this.carAmenitySelector = this.page.getByRole("checkbox", {
+      name: "car services",
+    });
+
+    this.roomFacilitySelector = this.page.getByRole("checkbox", {
+      name: "room",
+    });
+
+    this.propertyDetailsNextStepBtnSelector = this.page.getByRole("button", {
+      name: "Next Step",
+    });
   }
 
   async goToTheBranch(): Promise<void> {
@@ -161,5 +217,27 @@ export class AddPropertiesPage {
 
     await this.wardNoSelector.fill(data[0].wardno);
     await this.selectStreetAddress.fill(data[0].streetaddress);
+
+    await this.locationNextStepBtnSelector.click();
+  }
+
+  async fillPropertyDetailsForm(dataTable: DataTable): Promise<void> {
+    const data = dataTable.hashes();
+
+    await this.propertyFacingSelector.click();
+    await this.propertyFacingValueSelector.click();
+
+    await this.roadTypeSelector.click();
+    await this.roadTypeValueSelector.click();
+
+    await this.yearBuiltSelector.fill(data[0].yearbuilt);
+    await this.bedRoomSelector.fill(data[0].bedrooms);
+    await this.kitchenSelector.fill(data[0].kitchen);
+    await this.floorDimensionsSelector.fill(data[0].floorDimension);
+
+    await this.carAmenitySelector.click();
+    await this.roomFacilitySelector.click();
+
+    await this.propertyDetailsNextStepBtnSelector.click();
   }
 }
