@@ -37,7 +37,11 @@ When(
 When(
   "the user enters the location details:",
   async function (this: CustomWorld, dataTable: DataTable) {
-    console.log("Okay");
+    if (!this.addPropertiesPage) {
+      this.addPropertiesPage = new AddPropertiesPage(this.page);
+    }
+
+    await this.addPropertiesPage.filllocationInfoForm(dataTable);
   },
 );
 

@@ -26,6 +26,19 @@ export class AddPropertiesPage {
 
   private readonly basicInfoNextStepBtnSelector: Locator;
 
+  private readonly selectPropertyAreaSelector: Locator;
+  private readonly propertyAreaOptionSelector: Locator;
+
+  private readonly selectCitySelector: Locator;
+
+  private readonly selectMunicipalitySelector: Locator;
+  private readonly municipalityValueSelector: Locator;
+
+  private readonly wardNoSelector: Locator;
+  private readonly selectStreetAddress: Locator;
+
+  private readonly locationNextStepBtnSelector: Locator;
+
   constructor(page: Page) {
     this.page = page;
 
@@ -73,6 +86,31 @@ export class AddPropertiesPage {
     this.basicInfoNextStepBtnSelector = this.page.getByRole("button", {
       name: "Next Step",
     });
+
+    this.selectPropertyAreaSelector = this.page.getByText("Select area...");
+    this.propertyAreaOptionSelector = this.page.getByRole("option", {
+      name: "Baglung Buspark",
+    });
+    this.selectCitySelector = this.page.getByRole("textbox", {
+      name: "e.g. Kathmandu",
+    });
+
+    this.selectMunicipalitySelector = this.page.getByText(
+      "Select Municipality",
+    );
+    this.municipalityValueSelector = this.page
+      .locator("span")
+      .filter({ hasText: "Pokhara Metropolitian City" });
+
+    this.wardNoSelector = this.page.getByRole("textbox", { name: "Ward No" });
+
+    this.selectStreetAddress = this.page.getByRole("textbox", {
+      name: "e.g. Street 1",
+    });
+
+    this.locationNextStepBtnSelector = this.page.getByRole("button", {
+      name: "Next Step",
+    });
   }
 
   async goToTheBranch(): Promise<void> {
@@ -108,5 +146,20 @@ export class AddPropertiesPage {
       this.page.waitForLoadState("networkidle"),
       this.basicInfoNextStepBtnSelector.click(),
     ]);
+  }
+
+  async filllocationInfoForm(dataTable: DataTable): Promise<void> {
+    const data = dataTable.hashes();
+
+    await this.selectPropertyAreaSelector.click();
+    await this.propertyAreaOptionSelector.click();
+
+    await this.selectCitySelector.fill(data[0].city);
+
+    await this.selectMunicipalitySelector.click();
+    await this.municipalityValueSelector.click();
+
+    await this.wardNoSelector.fill(data[0].wardno);
+    await this.selectStreetAddress.fill(data[0].streetaddress);
   }
 }

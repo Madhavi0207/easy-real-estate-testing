@@ -13,8 +13,8 @@ When the admin user fills basic info:
  | home for sale | beautiful house is available  | 1     |
 
  And the user enters the location details:
- |properyarea | city    | muncipality         | wardno | streetaddress |
- |lekhnath    | pokhara | pokhara muncipality | 27     | 10            |
+ | city     | wardno | streetaddress |
+ | pokhara  | 27     | 10            |
 
  And the user enters the property details: 
  |propertyfacing | roadtype  | yearbuilt  | bedrooms | bathrooms | 
