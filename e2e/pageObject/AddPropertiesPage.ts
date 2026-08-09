@@ -56,6 +56,9 @@ export class AddPropertiesPage {
 
   private readonly propertyDetailsNextStepBtnSelector: Locator;
 
+  private readonly uploadFile: Locator;
+  private readonly publishListingBtnSelector: Locator;
+
   constructor(page: Page) {
     this.page = page;
 
@@ -167,6 +170,11 @@ export class AddPropertiesPage {
     this.propertyDetailsNextStepBtnSelector = this.page.getByRole("button", {
       name: "Next Step",
     });
+
+    this.uploadFile = this.page.locator("input[type='file']");
+    this.publishListingBtnSelector = this.page.getByRole("button", {
+      name: "Publish Listing",
+    });
   }
 
   async goToTheBranch(): Promise<void> {
@@ -239,5 +247,13 @@ export class AddPropertiesPage {
     await this.roomFacilitySelector.click();
 
     await this.propertyDetailsNextStepBtnSelector.click();
+  }
+
+  async uploadFileForm(): Promise<void> {
+    await this.uploadFile.setInputFiles([
+      "/home/madhu/Documents/easy-real-estate-testing/file",
+    ]);
+
+    await this.publishListingBtnSelector.click();
   }
 }

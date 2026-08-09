@@ -59,7 +59,11 @@ When(
 When(
   "the user uploads the photos of the house",
   async function (this: CustomWorld) {
-    console.log("Okay");
+    if (!this.addPropertiesPage) {
+      this.addPropertiesPage = new AddPropertiesPage(this.page);
+    }
+
+    await this.addPropertiesPage.uploadFileForm();
   },
 );
 
