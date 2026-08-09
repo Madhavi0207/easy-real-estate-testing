@@ -59,6 +59,8 @@ export class AddPropertiesPage {
   private readonly uploadFile: Locator;
   private readonly publishListingBtnSelector: Locator;
 
+  public readonly proprtyNameAssertion: Locator;
+
   constructor(page: Page) {
     this.page = page;
 
@@ -175,6 +177,10 @@ export class AddPropertiesPage {
     this.publishListingBtnSelector = this.page.getByRole("button", {
       name: "Publish Listing",
     });
+
+    this.proprtyNameAssertion = this.page
+      .locator("tr")
+      .filter({ hasText: "home for sale" });
   }
 
   async goToTheBranch(): Promise<void> {

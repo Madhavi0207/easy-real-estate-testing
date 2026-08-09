@@ -70,6 +70,10 @@ When(
 Then(
   "the property must be added to all properties",
   async function (this: CustomWorld) {
-    console.log("Okay");
+    if (!this.addPropertiesPage) {
+      this.addPropertiesPage = new AddPropertiesPage(this.page);
+    }
+
+    await expect(this.addPropertiesPage.proprtyNameAssertion).toBeVisible();
   },
 );
