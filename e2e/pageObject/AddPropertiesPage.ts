@@ -193,8 +193,7 @@ export class AddPropertiesPage {
     });
     await kaskiCard.hover();
 
-    await this.gotoAppSelector.click();
-    // expect(this.dashboardAssertion).toBeVisible();
+    Promise.all([await this.gotoAppSelector.click()]);
   }
 
   async addProperties(): Promise<void> {
