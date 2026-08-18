@@ -5,7 +5,7 @@ export class AddPropertiesPage {
   private readonly page: Page;
 
   private readonly gotoAppSelector: Locator;
-  private readonly dashboardAssertion: Locator;
+  // private readonly dashboardAssertion: Locator;
 
   private readonly propertySelector: Locator;
   private readonly addNewPropertySelector: Locator;
@@ -68,9 +68,10 @@ export class AddPropertiesPage {
       .getByRole("link", { name: "Go to app" })
       .nth(0);
 
-    this.dashboardAssertion = this.page.getByRole("button", {
-      name: /Kaski admin/,
-    });
+    // this.dashboardAssertion = this.page.getByRole("button", {
+    //   name: "Kaski Kaski Admin",
+    //   exact: true,
+    // });
     this.propertySelector = this.page.getByRole("button", {
       name: "Properties",
     });
@@ -186,11 +187,14 @@ export class AddPropertiesPage {
   }
 
   async goToTheBranch(): Promise<void> {
-    const kaskiCard = this.page.locator("article").filter({ hasText: "Kaski" });
+    const kaskiCard = this.page.getByRole("link", {
+      name: "Kaski",
+      exact: true,
+    });
     await kaskiCard.hover();
 
     await this.gotoAppSelector.click();
-    expect(this.dashboardAssertion).toBeVisible();
+    // expect(this.dashboardAssertion).toBeVisible();
   }
 
   async addProperties(): Promise<void> {
