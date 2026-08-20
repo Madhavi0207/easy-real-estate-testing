@@ -6,6 +6,7 @@ import { AddPropertiesPage } from "../pageObject/AddPropertiesPage";
 import { AddBuyerPage } from "../pageObject/AddBuyerPage";
 import { AddFacilityPage } from "../pageObject/AddFacilityPage";
 import { AddAmenitiesPage } from "../pageObject/AddAmenitiesPage";
+import { SettingsPage } from "../pageObject/SettingsPage";
 
 export class CustomWorld extends World {
   browser!: Browser;
@@ -17,6 +18,7 @@ export class CustomWorld extends World {
   addBuyerPage!: AddBuyerPage;
   addFacilityPage!: AddFacilityPage;
   addAmenitiesPage!: AddAmenitiesPage;
+  settingsPage!: SettingsPage;
   generateEmail!: String;
 
   users: Record<string, unknown> = {};
