@@ -3,7 +3,10 @@ import { expect } from "@playwright/test";
 import { CustomWorld } from "../support/CustomWorld";
 import { LoginPage } from "../pageObject/LoginPage";
 import { SettingsPage } from "../pageObject/SettingsPage";
+<<<<<<< HEAD
 import { AddPropertiesPage } from "../pageObject/AddPropertiesPage";
+=======
+>>>>>>> origin-work/settings
 
 // =====================================================
 // BACKGROUND
@@ -18,6 +21,7 @@ Given(
 
     await this.loginPage.navigateToLoginPage();
     await this.loginPage.enterDetails(dataTable);
+<<<<<<< HEAD
     await Promise.all([expect(this.loginPage.dashboardSelector).toBeVisible()]);
 
     if (!this.addPropertiesPage) {
@@ -25,6 +29,9 @@ Given(
     }
 
     await this.addPropertiesPage.goToTheBranch();
+=======
+    await expect(this.loginPage.dashboardSelector).toBeVisible();
+>>>>>>> origin-work/settings
   },
 );
 
@@ -61,6 +68,10 @@ Then(
     await expect(this.settingsPage.profileHeading).toBeVisible();
   },
 );
+<<<<<<< HEAD
+=======
+//changes from here
+>>>>>>> origin-work/settings
 
 When(
   "the user updates the profile name to {string}",
@@ -69,7 +80,11 @@ When(
       this.settingsPage = new SettingsPage(this.page);
     }
 
+<<<<<<< HEAD
     await this.settingsPage.updateProfileName("Test User");
+=======
+    await this.settingsPage.updateProfileName();
+>>>>>>> origin-work/settings
   },
 );
 
