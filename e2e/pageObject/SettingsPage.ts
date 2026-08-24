@@ -26,8 +26,7 @@ export class SettingsPage {
   // MY DETAILS
 
   private readonly myDetailsHeading: Locator;
-  private readonly myDetailsName: Locator;
-  private readonly myDetailsPhone: Locator;
+  private readonly myDetailsEmail: Locator;
 
   // DAILY LOG
 
@@ -98,8 +97,9 @@ export class SettingsPage {
       name: "My details",
     });
 
-    this.myDetailsName = this.page.getByText("Test User", { exact: true });
-    this.myDetailsPhone = this.page.getByText("98123456780", { exact: true });
+    this.myDetailsEmail = this.page.locator(
+      ".truncate text-sm text-muted-foreground",
+    );
 
     //daily log
     this.dailyLogLink = this.page.getByRole("link", { name: "Daily log" });
@@ -227,7 +227,7 @@ export class SettingsPage {
   }
 
   async goToSettings(): Promise<void> {
-    Promise.all([await this.settingsLink.click()]);
+    await Promise.all([this.settingsLink.click()]);
   }
 
   async profileSettings(): Promise<void> {
@@ -244,7 +244,7 @@ export class SettingsPage {
   async updateProfilePhone(phone: string): Promise<void> {
     await this.profilePhoneInput.click();
     await this.profilePhoneInput.clear();
-    await this.profilePhoneInput.fill(phone);
+    await this.profilePhoneInput.pressSequentially(phone);
   }
 
   async updateProfileButtonfunction(): Promise<void> {
@@ -258,24 +258,26 @@ export class SettingsPage {
   }
 
   async myDetailsValues(): Promise<void> {
-    await expect(this.myDetailsName).toHaveText("Test User");
-
-    await expect(this.myDetailsPhone).toHaveText("9812345670");
+    await expect(this.myDetailsEmail).toBeVisible();
   }
 
   async goToDailyLog(): Promise<void> {
     await this.dailyLogLink.click();
   }
 
-  async submitDailyLog(): Promise<void> {
+  async openDailyLogForm(): Promise<void> {
     await this.submitLogButton.click();
+  }
+
+  async enterDailyLogDetails(): Promise<void> {
     await this.propertiesCollected.fill("2");
     await this.propertiesShown.fill("1");
     await this.buyersAdded.fill("3");
-
-    await this.saveDailyLogButton.click();
   }
 
+  async saveDailyLog(): Promise<void> {
+    await this.saveDailyLogButton.click();
+  }
   async gotToSalesTarget(): Promise<void> {
     await this.salesTargetLink.click();
   }

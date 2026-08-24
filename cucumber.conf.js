@@ -14,7 +14,7 @@ let browser;
 
 BeforeAll(async function () {
   browser = await chromium.launch({
-    headless: false,
+    headless: true,
   });
 });
 

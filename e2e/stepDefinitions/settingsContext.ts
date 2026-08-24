@@ -3,10 +3,7 @@ import { expect } from "@playwright/test";
 import { CustomWorld } from "../support/CustomWorld";
 import { LoginPage } from "../pageObject/LoginPage";
 import { SettingsPage } from "../pageObject/SettingsPage";
-<<<<<<< HEAD
 import { AddPropertiesPage } from "../pageObject/AddPropertiesPage";
-=======
->>>>>>> origin-work/settings
 
 // =====================================================
 // BACKGROUND
@@ -21,7 +18,6 @@ Given(
 
     await this.loginPage.navigateToLoginPage();
     await this.loginPage.enterDetails(dataTable);
-<<<<<<< HEAD
     await Promise.all([expect(this.loginPage.dashboardSelector).toBeVisible()]);
 
     if (!this.addPropertiesPage) {
@@ -29,9 +25,6 @@ Given(
     }
 
     await this.addPropertiesPage.goToTheBranch();
-=======
-    await expect(this.loginPage.dashboardSelector).toBeVisible();
->>>>>>> origin-work/settings
   },
 );
 
@@ -68,34 +61,16 @@ Then(
     await expect(this.settingsPage.profileHeading).toBeVisible();
   },
 );
-<<<<<<< HEAD
-=======
-//changes from here
->>>>>>> origin-work/settings
 
 When(
-  "the user updates the profile name to {string}",
-  async function (this: CustomWorld, name: string) {
+  "the user updates the profile name to {string} and phone number to {string}",
+  async function (this: CustomWorld, name: string, phone: string) {
     if (!this.settingsPage) {
       this.settingsPage = new SettingsPage(this.page);
     }
 
-<<<<<<< HEAD
-    await this.settingsPage.updateProfileName("Test User");
-=======
-    await this.settingsPage.updateProfileName();
->>>>>>> origin-work/settings
-  },
-);
-
-When(
-  "the user updates the phone number to {string}",
-  async function (this: CustomWorld, phone: string) {
-    if (!this.settingsPage) {
-      this.settingsPage = new SettingsPage(this.page);
-    }
-
-    await this.settingsPage.updateProfilePhone("9812345670");
+    await this.settingsPage.updateProfileName(name);
+    await this.settingsPage.updateProfilePhone(phone);
   },
 );
 
@@ -117,8 +92,8 @@ Then(
       this.settingsPage = new SettingsPage(this.page);
     }
 
-    await expect(this.settingsPage.profileNameInput).toHaveText("Test User");
-    await expect(this.settingsPage.profilePhoneInput).toHaveText("98123456");
+    await expect(this.settingsPage.profileNameInput).toHaveValue("Test User");
+    await expect(this.settingsPage.profilePhoneInput).toHaveValue("98123456");
   },
 );
 
@@ -179,7 +154,9 @@ When(
       this.settingsPage = new SettingsPage(this.page);
     }
 
-    await this.settingsPage.submitDailyLog();
+    await this.settingsPage.openDailyLogForm();
+    await this.settingsPage.enterDailyLogDetails();
+    await this.settingsPage.saveDailyLog();
   },
 );
 

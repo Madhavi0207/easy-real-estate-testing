@@ -20,8 +20,7 @@ Feature: Manage Settings
 
   Scenario: Update profile
     When the user navigates to the Profile settings
-    And the user updates the profile name to "Test User"
-    And the user updates the phone number to "981234567"
+    And the user updates the profile name to "Test User" and phone number to "981234567"
     And the user clicks the Update profile button
     Then the profile should be updated successfully
 
